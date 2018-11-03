@@ -23,6 +23,7 @@ class CreateTableDidPhoneNumbers extends Migration
             $table->uuid('pbx_id')->nullable();
             $table->string('friendly_phone_number');
             $table->string('country');
+            $table->string('city');
             $table->boolean('toll_free');
             $table->timestamps();
             $table->softDeletes();

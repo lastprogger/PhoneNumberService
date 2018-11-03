@@ -16,7 +16,7 @@ class CreateTableStatusDidPhoneNumberLog extends Migration
         Schema::create(
             'status_did_phone_number_logs', function (Blueprint $table) {
 
-            $table->integer('id')->primary();
+            $table->increments('id');
             $table->string('status');
             $table->uuid('did_phone_number_id');
             $table->uuid('company_id')->nullable();

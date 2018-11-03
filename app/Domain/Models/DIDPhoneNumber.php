@@ -17,6 +17,7 @@ use Ramsey\Uuid\Uuid;
  * @property string|null $pbx_id
  * @property string      $friendly_phone_number
  * @property string      $country
+ * @property string      $city
  * @property bool        $toll_free
  * @property Carbon      $created_at
  * @property Carbon      $updated_at

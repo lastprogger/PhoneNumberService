@@ -2,7 +2,6 @@
 
 namespace App\Domain\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Concerns\HasTimestamps;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -19,9 +18,6 @@ use Ramsey\Uuid\Uuid;
  * @property string      $country
  * @property string      $city
  * @property bool        $toll_free
- * @property Carbon      $created_at
- * @property Carbon      $updated_at
- * @property Carbon      $deleted_at
  */
 class DIDPhoneNumber extends Model
 {
@@ -34,9 +30,6 @@ class DIDPhoneNumber extends Model
     public const STATUS_WAITING_FOR_PAYMENT    = 'waiting_for_payment';
 
     protected $table      = 'did_phone_numbers';
-    public    $timestamps = false;
-
-    protected $dates = ['created_at', 'deleted_at'];
 
     protected static function boot()
     {

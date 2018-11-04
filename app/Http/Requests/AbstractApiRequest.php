@@ -8,6 +8,7 @@ abstract class AbstractApiRequest extends FormRequest
 {
     public const CUSTOM_HEADER_USER_ID   = '-x-user-id';
     public const CUSTOM_HEADER_USER_ROLE = '-x-user-role';
+    public const CUSTOM_HEADER_USER_COMPANY_ID = '-x-user-company-id';
 
     /**
      * @return array
@@ -28,17 +29,25 @@ abstract class AbstractApiRequest extends FormRequest
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getInitiatorUserId(): string
+    public function getUserId(): ?string
     {
         return $this->header(self::CUSTOM_HEADER_USER_ID);
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getInitiatorUserRole(): string
+    public function getUserCompanyId(): ?string
+    {
+        return $this->header(self::CUSTOM_HEADER_USER_COMPANY_ID);
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getUserRole(): ?string
     {
         return $this->header(self::CUSTOM_HEADER_USER_ROLE);
     }

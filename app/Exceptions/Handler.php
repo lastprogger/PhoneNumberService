@@ -55,7 +55,7 @@ class Handler extends ExceptionHandler
      * @return mixed
      */
     public function render($request, Exception $exception)
-    {
+    {dd($exception);
         return parent::render($request, $exception);
     }
 }

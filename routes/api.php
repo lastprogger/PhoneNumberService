@@ -22,6 +22,6 @@ Route::group(
         Controller::ACTION_GROUP_NAME_KEY => Controller::ACTION_GROUP_NAME_PUBLIC_API,
     ],
     function () {
-//        Route::resource('/some/url', 'controllerName');
+        Route::resource('did', 'DIDPhoneNumberController');
     }
 );

@@ -14,6 +14,7 @@ $factory->define(
         'pbx_id'                => $faker->uuid,
         'friendly_phone_number' => $phoneNr,
         'country'               => $faker->countryCode,
+        'city'                  => $faker->city,
         'toll_free'             => false,
     ];
 }

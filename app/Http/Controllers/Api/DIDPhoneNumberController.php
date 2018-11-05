@@ -35,4 +35,22 @@ class DIDPhoneNumberController extends Controller
 
         return response()->json($didPhoneNr->toArray());
     }
+
+    /**
+     * @param string  $apiVersion
+     * @param string  $phoneNumber
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\JsonResponse|Response
+     */
+    public function getByPhoneNumber(string $apiVersion, string $phoneNumber, Request $request)
+    {
+        $didPhoneNr = DIDPhoneNumber::where('phone_number', $phoneNumber)->get()->first();
+
+        if ($didPhoneNr === null) {
+            return response()->make()->setStatusCode(Response::HTTP_NOT_FOUND);
+        }
+
+        return response()->json($didPhoneNr->toArray());
+    }
 }

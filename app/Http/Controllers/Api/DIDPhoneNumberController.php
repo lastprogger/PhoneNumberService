@@ -10,7 +10,7 @@ use App\Http\Requests\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 
-class DIDPhoneNumberController extends Controller
+class DIDPhoneNumberController extends AbstractApiController
 {
     /**
      * @param string  $apiVersion
@@ -24,16 +24,16 @@ class DIDPhoneNumberController extends Controller
         $validator = Validator::make(['id' => $didPhoneNumberId], ['id' => 'uuid']);
 
         if (!$validator->passes()) {
-            return response()->make()->setStatusCode(Response::HTTP_BAD_REQUEST);
+            return $this->respondWithError('invalid id',Response::HTTP_BAD_REQUEST);
         }
 
         $didPhoneNr = DIDPhoneNumber::find($didPhoneNumberId);
 
         if ($didPhoneNr === null) {
-            return response()->make()->setStatusCode(Response::HTTP_NOT_FOUND);
+            return $this->respondNotFound();
         }
 
-        return response()->json($didPhoneNr->toArray());
+        return $this->respondOk($didPhoneNr->toArray());
     }
 
     /**
@@ -45,12 +45,14 @@ class DIDPhoneNumberController extends Controller
      */
     public function getByPhoneNumber(string $apiVersion, string $phoneNumber, Request $request)
     {
-        $didPhoneNr = DIDPhoneNumber::where('phone_number', $phoneNumber)->get()->first();
+        $phoneNumber = DIDPhoneNumber::cleanNumber($phoneNumber);
+        $didPhoneNr  = DIDPhoneNumber::where('phone_number', $phoneNumber)->get()->first();
 
         if ($didPhoneNr === null) {
-            return response()->make()->setStatusCode(Response::HTTP_NOT_FOUND);
+            return $this->respondNotFound();
         }
+        $didPhoneNr->load('pbx');
 
-        return response()->json($didPhoneNr->toArray());
+        return $this->respondOk($didPhoneNr->toArray());
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableStatusDidPhoneNumberLog extends Migration
+class CreateTableReservations extends Migration
 {
     /**
      * Run the migrations.
@@ -14,14 +14,15 @@ class CreateTableStatusDidPhoneNumberLog extends Migration
     public function up()
     {
         Schema::create(
-            'status_did_phone_number_logs', function (Blueprint $table) {
+            'reservations', function (Blueprint $table) {
 
-            $table->increments('id');
-            $table->string('status');
+            $table->uuid('id');
+            $table->string('type');
             $table->uuid('did_phone_number_id');
-            $table->uuid('company_id')->nullable();
-            $table->string('comment')->nullable();
+            $table->uuid('company_id');
+            $table->boolean('active');
             $table->timestamp('created_at');
+            $table->timestamp('reserved_until');
         }
         );
     }
@@ -33,6 +34,6 @@ class CreateTableStatusDidPhoneNumberLog extends Migration
      */
     public function down()
     {
-        Schema::drop('status_did_phone_number_logs');
+        Schema::drop('reservations');
     }
 }

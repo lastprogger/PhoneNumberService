@@ -19,11 +19,9 @@ class CreateTableDidPhoneNumbers extends Migration
             $table->uuid('id');
             $table->string('phone_number');
             $table->string('status');
-            $table->uuid('company_id')->nullable();
-            $table->uuid('pbx_id')->nullable();
             $table->string('friendly_phone_number');
             $table->string('country');
-            $table->string('city');
+            $table->string('city')->nullable();
             $table->boolean('toll_free');
             $table->timestamps();
             $table->softDeletes();

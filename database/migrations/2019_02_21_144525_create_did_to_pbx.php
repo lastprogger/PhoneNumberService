@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableStatusDidPhoneNumberLog extends Migration
+class CreateDidToPbx extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,13 @@ class CreateTableStatusDidPhoneNumberLog extends Migration
      */
     public function up()
     {
-        Schema::create(
-            'status_did_phone_number_logs', function (Blueprint $table) {
-
+        Schema::create('did_to_pbx', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('status');
+            $table->uuid('pbx_id');
             $table->uuid('did_phone_number_id');
-            $table->uuid('company_id')->nullable();
-            $table->string('comment')->nullable();
-            $table->timestamp('created_at');
-        }
-        );
+            $table->timestamps();
+            $table->softDeletes();
+        });
     }
 
     /**
@@ -33,6 +29,6 @@ class CreateTableStatusDidPhoneNumberLog extends Migration
      */
     public function down()
     {
-        Schema::drop('status_did_phone_number_logs');
+        Schema::dropIfExists('did_to_pbx');
     }
 }

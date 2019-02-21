@@ -22,8 +22,10 @@ Route::group(
         Controller::ACTION_GROUP_NAME_KEY => Controller::ACTION_GROUP_NAME_PUBLIC_API,
     ],
     function () {
+        Route::post('reservation', 'ReservationsController@store')->middleware('auth.custom');
+        Route::get('reservation', 'ReservationsController@index')->middleware('auth.custom');
+
         Route::get('did/get-by-number/{phone_number}', 'DIDPhoneNumberController@getByPhoneNumber');
         Route::resource('did', 'DIDPhoneNumberController');
-
     }
 );

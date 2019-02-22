@@ -27,5 +27,7 @@ Route::group(
 
         Route::get('did/get-by-number/{phone_number}', 'DIDPhoneNumberController@getByPhoneNumber');
         Route::resource('did', 'DIDPhoneNumberController');
+
+        Route::resource('did-attaching', 'PhoneNumberAttachController')->middleware('auth.custom');
     }
 );

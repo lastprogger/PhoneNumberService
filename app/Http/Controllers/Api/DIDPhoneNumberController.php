@@ -51,7 +51,8 @@ class DIDPhoneNumberController extends AbstractApiController
         if ($didPhoneNr === null) {
             return $this->respondNotFound();
         }
-        $didPhoneNr->load('pbx');
+
+        $didPhoneNr->load('pbx', 'reservation');
 
         return $this->respondOk($didPhoneNr->toArray());
     }

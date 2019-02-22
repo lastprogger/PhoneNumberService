@@ -18,6 +18,7 @@ use Ramsey\Uuid\Uuid;
  * @property string $city
  * @property bool   $toll_free
  * @property-read DidToPbx $pbx
+ * @property-read Reservation $reservation
  */
 class DIDPhoneNumber extends Model
 {
@@ -46,6 +47,14 @@ class DIDPhoneNumber extends Model
     public function pbx(): BelongsTo
     {
         return $this->belongsTo(DidToPbx::class, 'id', 'did_phone_number_id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function reservation(): BelongsTo
+    {
+        return $this->belongsTo(Reservation::class, 'id', 'did_phone_number_id');
     }
 
     public static function cleanNumber(string $number): string

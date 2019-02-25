@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Api;
 use App\Domain\Models\DIDPhoneNumber;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 
@@ -55,5 +56,30 @@ class DIDPhoneNumberController extends AbstractApiController
         $didPhoneNr->load('pbx', 'reservation');
 
         return $this->respondOk($didPhoneNr->toArray());
+    }
+
+    /**
+     * @return JsonResponse
+     */
+    public function index(): JsonResponse
+    {
+        $all = DIDPhoneNumber::all();
+
+        return $this->respondOk($all->toArray());
+    }
+
+    public function store(Request $request): JsonResponse
+    {
+        $did = new DIDPhoneNumber();
+        $did->status = DIDPhoneNumber::STATUS_FREE;
+        $did->phone_number = $request->get('phone_number');
+        $did->friendly_phone_number = $request->get('friendly_phone_number');
+        $did->country = $request->get('country');
+        $did->city = $request->get('city');
+        $did->toll_free = $request->get('toll_free', false);
+
+        $did->save();
+
+        return $this->respondOk($did->toArray());
     }
 }

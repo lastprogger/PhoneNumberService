@@ -57,8 +57,14 @@ class DIDPhoneNumber extends Model
         return $this->belongsTo(Reservation::class, 'id', 'did_phone_number_id');
     }
 
-    public static function cleanNumber(string $number): string
+    public static function cleanNumber(string $number, bool $withPlus = true): string
     {
-        return '+' . str_replace(['+','(',')','-','.',' '], '', $number);
+        $number = preg_replace('/[^0-9]/', '', $number);
+
+        if ($withPlus) {
+            $number = '+' . $number;
+        }
+
+        return $number;
     }
 }

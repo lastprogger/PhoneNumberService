@@ -76,12 +76,6 @@ return [
             'driver' => 'errorlog',
             'level'  => 'debug',
         ],
-
-        'graylog' => [
-            'driver'    => 'monolog',
-            'handler'   => BelkaCar\PhpLibGraylog\LogHandler::class,
-            'formatter' => BelkaCar\PhpLibGraylog\LogFormatter::class,
-        ],
     ],
 
 ];

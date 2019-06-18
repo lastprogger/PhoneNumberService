@@ -72,7 +72,7 @@ class DIDPhoneNumberController extends AbstractApiController
     {
         $did = new DIDPhoneNumber();
         $did->status = DIDPhoneNumber::STATUS_FREE;
-        $did->phone_number = $request->get('phone_number');
+        $did->phone_number = DIDPhoneNumber::cleanNumber($request->get('phone_number'));
         $did->friendly_phone_number = $request->get('friendly_phone_number');
         $did->country = $request->get('country');
         $did->city = $request->get('city');

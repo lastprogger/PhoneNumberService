@@ -29,5 +29,6 @@ Route::group(
         Route::resource('did', 'DIDPhoneNumberController');
 
         Route::resource('did-attaching', 'PhoneNumberAttachController')->middleware('auth.custom');
+        Route::resource('user-phone', 'UserPhoneNumbersController')->middleware('auth.custom');
     }
 );
